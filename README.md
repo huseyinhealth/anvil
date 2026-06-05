@@ -2,13 +2,16 @@
 A terminal-based instance and mod manager for Minecraft. (Only supports Fabric for now)
 
 ## Installation
+
+### Download install.sh
 ```sh
-curl -fsSL https://raw.githubusercontent.com/huseyinhealth/anvil/main/install.sh | bash # install to ~/.local/bin
+curl -fsSL https://raw.githubusercontent.com/huseyinhealth/anvil/main/install.sh -o /tmp/anvil-install.sh
 ```
-or
+
+### Run install.sh
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/huseyinhealth/anvil/main/install.sh | bash -s -- --system # install to /usr/local/bin
+bash /tmp/anvil-install.sh
 ```
 
 ## Usage
