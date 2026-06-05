@@ -65,7 +65,7 @@ func resolveMod(slug, gameVersion string, installedMods []internal.Mod) ([]ModIn
 
     version := versions[0]
 
-    incompatible kontrolü
+    // incompatible check
     for _, dep := range version.Dependencies {
         if dep.DependencyType == "incompatible" {
             for _, installed := range installedMods {
