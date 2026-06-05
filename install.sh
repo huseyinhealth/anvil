@@ -53,7 +53,7 @@ success "Go $GO_VERSION"
 INSTALL_DIR="$HOME/.local/share/anvil-src"
 if [ -d "$INSTALL_DIR" ]; then
     info "Updating existing source..."
-    git -C "$INSTALL_DIR" pull --quiet
+    git -C "$INSTALL_DIR" pull --quiet --rebase
 else
     info "Cloning repository..."
     git clone --quiet https://github.com/huseyinhealth/anvil "$INSTALL_DIR"
