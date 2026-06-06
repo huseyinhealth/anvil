@@ -12,12 +12,13 @@ type Command = internal.Command
 
 var commands []Command
 
-func registerCommand(name string, alias []string, minArgs int, f func(...string)) {
+func registerCommand(name string, description string, alias []string, minArgs int, f func(...string)) {
 	commands = append(commands, internal.Command{
-        Name:  name,
+        Name: name,
+		Description: description,
         Alias: alias,
-        MinArgs:  minArgs,
-        F:     f,
+        MinArgs: minArgs,
+        F: f,
     })
 }
 
@@ -55,19 +56,19 @@ func main() {
 		os.Exit(1)
 	}
 
-	registerCommand("destroy",   []string{},           		1, cmd.Destroy)
-	registerCommand("help",      []string{"-h", "--help"},  0, cmd.Help)
-	registerCommand("install",   []string{"add", "i"}, 		1, cmd.Install)
-	registerCommand("list",      []string{},           		0, cmd.List)
-	registerCommand("login",     []string{"signin"},   		0, cmd.Login)
-	registerCommand("logout",    []string{"signout"},  		0, cmd.Logout)
-	registerCommand("modlist",   []string{},           		0, cmd.ModList)
-	registerCommand("new",       []string{"create", "n"},   2, cmd.New)
-	registerCommand("run",       []string{},           		0, cmd.Run)
-	registerCommand("search",    []string{"find", "s"},     1, cmd.Search)
-	registerCommand("select",    []string{"switch"},   		1, cmd.Select)
-	registerCommand("status",    []string{},           		0, cmd.Status)
-	registerCommand("uninstall", []string{"remove", "r"},   1, cmd.Remove)
+	registerCommand("destroy", 		"Destroy (delete) instance.",			[]string{},           		1, cmd.Destroy)
+	registerCommand("help", 		"Show help.",      						[]string{"-h", "--help"},  	0, cmd.Help)
+	registerCommand("install", 		"Install a mod by slug.",   			[]string{"add", "i"}, 		1, cmd.Install)
+	registerCommand("list", 		"List instances.",     					[]string{},           		0, cmd.List)
+	registerCommand("login", 		"Login with a Microsoft account.", 		[]string{"signin"},   		0, cmd.Login)
+	registerCommand("logout", 		"Log out from Microsoft account.",		[]string{"signout"},  		0, cmd.Logout)
+	registerCommand("modlist", 		"List installed mods.",   				[]string{},           		0, cmd.ModList)
+	registerCommand("new", 			"Create a new instance.",       		[]string{"create", "n"},   	2, cmd.New)
+	registerCommand("run", 			"Run selected instance.",       		[]string{},           		0, cmd.Run)
+	registerCommand("search", 		"Search mods on Modrinth.",    			[]string{"find", "s"},     	1, cmd.Search)
+	registerCommand("select", 		"Select instance.",    					[]string{"switch"},   		1, cmd.Select)
+	registerCommand("status", 		"Show account and selected instance.",  []string{},           		0, cmd.Status)
+	registerCommand("uninstall", 	"Uninstall a mod.", 					[]string{"remove", "r"},   	1, cmd.Remove)
 
 	parseArgs()
 }

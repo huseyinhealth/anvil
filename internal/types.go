@@ -2,6 +2,7 @@ package internal
 
 type Command struct {
 	Name string
+	Description string
 	Alias []string
 	MinArgs int
 	F func(...string)
