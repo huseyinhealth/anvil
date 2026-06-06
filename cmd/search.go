@@ -47,7 +47,6 @@ func Search(args... string) {
 
 	var result internal.ModrinthSearch
 
-    // 2. Parametreleri SetQueryParams ile kütüphaneye devrediyoruz (Otomatik URL Encode yapar)
     _, err = rClient.R().
         SetQueryParams(map[string]string{
             "query":  query,

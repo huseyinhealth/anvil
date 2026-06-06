@@ -22,7 +22,6 @@ func buildClasspath(verInfo *internal.VersionInfo, fabricProfile *internal.Fabri
         paths = append(paths, filepath.Join(instanceDir, "libraries", mavenPath(lib.Name)))
     }
 
-    // minecraft jar en sona
     paths = append(paths, filepath.Join(instanceDir, "versions", verInfo.ID, verInfo.ID+".jar"))
 
     return strings.Join(paths, ":")
@@ -32,20 +31,17 @@ func parseArguments(args []json.RawMessage) []string {
     var result []string
 
     for _, arg := range args {
-        // önce string olarak dene
         var s string
         if json.Unmarshal(arg, &s) == nil {
             result = append(result, s)
             continue
         }
 
-        // string değilse koşullu argüman
         var conditional internal.ConditionalArg
         if json.Unmarshal(arg, &conditional) != nil {
             continue
         }
 
-        // rule kontrolü
         allowed := false
         for _, rule := range conditional.Rules {
 			if rule.Action == "allow" {
@@ -63,7 +59,6 @@ func parseArguments(args []json.RawMessage) []string {
             continue
         }
 
-        // value string ya da []string olabilir
         var single string
         if json.Unmarshal(conditional.Value, &single) == nil {
             result = append(result, single)

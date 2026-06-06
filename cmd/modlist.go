@@ -34,13 +34,11 @@ func ModList(args... string) {
 		return
 	}
 
-	// FgGreen yerine FgHiGreen (Bright Green) kullanıyoruz
     brightGreen := color.New(color.FgHiGreen).SprintFunc()
 
     fmt.Printf("Installed mods on instance \"%s\":\n\n", instanceName)
 
     for _, i := range instance.Mods {
-        // Artık tam APT tarzı açık yeşil basacak
         fmt.Printf("%s - %s\n", brightGreen(i.Slug), i.Name)
     }
 }

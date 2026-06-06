@@ -61,7 +61,6 @@ func (pw *progressWriter) Write(p []byte) (int, error) {
 	n, err := pw.file.Write(p)
 	pw.written += int64(n)
 
-	// 50ms'de bir güncelle
 	if time.Since(pw.last) < 50*time.Millisecond && err == nil {
 		return n, err
 	}

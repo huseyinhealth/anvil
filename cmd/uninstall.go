@@ -26,13 +26,11 @@ func Remove(args ...string) {
     }
     json.Unmarshal(data, &instance)
 
-    // kaldırılacak modları bul ve kontrol et
     var toRemove []internal.Mod
     for _, slug := range args {
         found := false
         for _, mod := range instance.Mods {
             if mod.Slug == slug {
-                // başka mod bu modu gerektiriyor mu
                 if len(mod.RequiredBy) > 0 {
                     fmt.Printf("Error: %s is required by %s\n", slug, strings.Join(mod.RequiredBy, ", "))
                     os.Exit(1)
@@ -57,7 +55,6 @@ func Remove(args ...string) {
         }
     }
 
-    // onay ekranı
     fmt.Println("The following mods will be removed:")
     for _, mod := range toRemove {
         fmt.Printf("  %s %s\n", mod.Name, mod.Version)
@@ -72,9 +69,7 @@ func Remove(args ...string) {
         return
     }
 
-    // jar'ları sil ve instance.Mods'dan çıkar
     for _, mod := range toRemove {
-        // mods klasöründeki jar'ı bul ve sil
         modsDir := filepath.Join(instanceDir, "mods")
         entries, _ := os.ReadDir(modsDir)
         for _, entry := range entries {
@@ -83,7 +78,6 @@ func Remove(args ...string) {
             }
         }
 
-        // instance.Mods'dan çıkar
         for i, m := range instance.Mods {
             if m.Slug == mod.Slug {
                 instance.Mods = append(instance.Mods[:i], instance.Mods[i+1:]...)
@@ -91,7 +85,6 @@ func Remove(args ...string) {
             }
         }
 
-        // requiredBy güncellemesi
         for i := range instance.Mods {
             for j, rb := range instance.Mods[i].RequiredBy {
                 if rb == mod.Slug {

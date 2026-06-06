@@ -29,11 +29,11 @@ func FileHash(path string) (string, error) {
 
 func RemoveFromSlice[T comparable](slice []T, target T) []T {
     for i, v := range slice {
-        if v == target { // comparable sayesinde derleyici buraya kızmaz!
+        if v == target {
             return append(slice[:i], slice[i+1:]...)
         }
     }
-    return slice // Eleman bulunamazsa orijinal slice'ı dön
+    return slice
 }
 
 func GetSelectedInstance() (string, int) {
