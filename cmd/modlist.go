@@ -6,12 +6,12 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"slices"
 
 	"github.com/fatih/color"
 )
 
 func ModList(args... string) {
-
 	var instance internal.Instance
 
 	instanceName, er := internal.GetSelectedInstance()
@@ -28,6 +28,13 @@ func ModList(args... string) {
 	}
 
 	json.Unmarshal(data, &instance)
+
+	if slices.Contains(args, "-s") || slices.Contains(args, "--slugs") {
+		for _, i := range instance.Mods {
+			fmt.Println(i.Slug)
+		}
+		os.Exit(0)
+	}
 
 	if len(instance.Mods) == 0 {
 		fmt.Println("You didn't install any mods!")
