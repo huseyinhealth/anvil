@@ -1,54 +1,23 @@
+markdown
+
 # Anvil
-A terminal-based instance and mod manager for Minecraft. (Only supports Fabric for now)
+A terminal-based instance and mod manager for FabricMC.
 
 ## Installation
-
-### Download install.sh
 ```sh
 curl -fsSL https://raw.githubusercontent.com/huseyinhealth/anvil/main/install.sh -o /tmp/anvil-install.sh
-```
-
-### Run install.sh
-
-```sh
 bash /tmp/anvil-install.sh
 ```
 
+For system-wide installation:
+```sh
+bash /tmp/anvil-install.sh --system
+```
+
 ## Usage
-
-### Help
-
 ```sh
 anvil help
 ```
-
-### Account
-```sh
-anvil login           # Sign in with Microsoft
-anvil logout          # Sign out
-anvil status          # Show current account and selected instance
-```
-
-### Instance Management
-```sh
-anvil new <name> <version>        # Create a new Fabric instance
-anvil select <name>               # Select an instance
-anvil run                         # Launch the selected instance
-anvil list                        # List all instances
-anvil destroy <name>              # Delete an instance
-```
-
-Aliases: `new` → `create`, `select` → `switch`
-
-### Mod Management
-```sh
-anvil install <slug> [slug...]    # Install one or more mods
-anvil uninstall <slug> [slug...]  # Remove one or more mods
-anvil modlist                     # List installed mods
-anvil search <query>              # Search mods on Modrinth
-```
-
-Aliases: `install` → `add`, `uninstall` → `remove`
 
 ## Configuration
 Anvil stores all data in `~/.anvil/`:
@@ -64,17 +33,17 @@ Anvil stores all data in `~/.anvil/`:
 │       ├── versions/
 │       └── anvil.json  # Instance metadata
 ├── jre/                # Java runtimes (managed by Anvil)
+├── cache/              # Download cache
 ├── profile.json        # Microsoft account info
-├── .selected           # Currently selected instance
-└── filecache.json      # Download cache
+└── .selected           # Currently selected instance
 ```
-
 
 ## Roadmap
 - [ ] `anvil update` — update installed mods
 - [ ] `anvil autoremove` — remove unused dependencies
 - [ ] Forge support
 - [ ] CurseForge support
+- [ ] Server support
 
 ## Contributing
 Contributions are welcome! Feel free to open a pull request for anything you'd like to add or fix. Just make sure your PR has a clear description of what it does and why.
@@ -86,4 +55,4 @@ Contributions are welcome! Feel free to open a pull request for anything you'd l
 - [Mojang](https://minecraft.net) — Minecraft and launcher meta API
 
 ## License
-GPL v3
+GPL-3.0
