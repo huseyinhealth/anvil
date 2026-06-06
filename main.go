@@ -10,10 +10,8 @@ import (
 
 type Command = internal.Command
 
-var commands []Command
-
 func registerCommand(name string, description string, alias []string, minArgs int, f func(...string)) {
-	commands = append(commands, internal.Command{
+	internal.Commands = append(internal.Commands, internal.Command{
         Name: name,
 		Description: description,
         Alias: alias,
@@ -38,9 +36,9 @@ func runCommand(command *Command) {
 
 func parseArgs() {
 	commandName := os.Args[1]
-	for i, j := range commands {
+	for i, j := range internal.Commands {
 		if j.Name == commandName || slices.Contains(j.Alias, commandName){
-			runCommand(&commands[i])
+			runCommand(&internal.Commands[i])
 			return
 		}
 	}

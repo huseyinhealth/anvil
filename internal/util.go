@@ -10,6 +10,8 @@ import (
 	"github.com/go-resty/resty/v2"
 )
 
+var Commands []Command
+
 func FileHash(path string) (string, error) {
     file, err := os.Open(path)
     if err != nil {
