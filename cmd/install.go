@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"anvil/internal"
+	"bufio"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -209,6 +210,35 @@ func Install(args ...string) {
 			allPlans = append(allPlans, fabricPlans...)
 		}
 	}
+
+    if (args[0] == "-f" || args[0] == "--from") {
+        if len(args) < 2 {
+            fmt.Println("Error: Input file not specified.")
+            os.Exit(1)
+        }
+
+        file, err := os.Open(args[1])
+        
+        if err != nil {
+            fmt.Printf("Error: %v\n", err)
+            os.Exit(1)
+        }
+        
+        defer file.Close()
+        var mods []string
+        scanner := bufio.NewScanner(file)
+
+        for scanner.Scan() {
+            mods = append(mods, scanner.Text())
+        }
+
+        if err := scanner.Err(); err != nil {
+            fmt.Printf("Error: %v\n", err)
+            os.Exit(1)
+        }
+
+        args = mods
+    }
 
     for _, slug := range args {
         alreadyInstalled := false
